@@ -1,12 +1,27 @@
-def prime_list(n):
-    # 에라토스테네스의 체 초기화: n개 요소에 True 설정(소수로 간주)
-    sieve = [True] * n
+import math # 광범위 수학작업을 위한 내장함수  
 
-    m = int(n ** 0.5)
-    for i in range(2, m + 1):
-        if sieve[i] == True:           # i가 소수인 경우 
-            for j in range(i+i, n, i): # i이후 i의 배수들을 False 판정
-                sieve[j] = False
+def IsPrime(num):               # 소수 구하는 함수 (ISprime) 선언
+    a = int(math.sqrt(num))     # math.sqrt = 제곱근 반환 
+    if num == 1:
+        return False
+    else:
+        for i in range(2, a+1):
+            if num % i == 0: 
+                return False
+        return True
 
-    # 소수 목록 산출
-    return [i for i in range(2, n) if sieve[i] == True]
+Num_list = list(range(2,246912)) # 함수 범위 지정
+Sort_list = []
+for i in Num_list:
+    if IsPrime(i):
+         Sort_list.append(i)
+
+while True:                     # count 출력 
+    n = int(input())
+    if n == 0:                  # n이 0이라면
+        break
+    cnt = 0
+    for i in Sort_list:          # sort_list i까지 반복   
+        if n < i <= n*2:              
+            cnt += 1
+    print(cnt)     
